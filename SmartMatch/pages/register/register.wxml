@@ -1,0 +1,80 @@
+<!--pages/register/register.wxml-->
+<view class="section">
+  <view class="team" >
+    <view class="team-name">
+      <text>{{team}}</text>
+    </view>
+    <view class="header">
+      <text>号码</text><text>姓名</text>
+    </view>
+    <view wx:for="{{players}}" wx:key="*this">
+      <view class="player">
+        <text class="player-info">{{item.num}}</text>
+        <text class="player-info">{{item.name}}</text>
+        <text class="player-edit" bindtap="edit" data-index="{{index}}">修改</text>
+        <text class="player-edit" bindtap="remove" data-index="{{index}}">删除</text>
+      </view>
+    </view>
+  <view class="add-player">
+    <view class="add-player-input">
+      <input class="add-player-num" bindinput="playerNumInput" type="number" value="{{tempNum}}"
+      placeholder="号码" auto-focus/>
+    </view>
+    <view class="add-player-input">
+      <input class="add-player-name" bindinput="playerNameInput" value="{{tempName}}"
+      placeholder="姓名" auto-focus/>
+    </view>
+    <view style="display:flex;justify-content: center;">
+        <button type="default" class="btn-add" bindtap="clickBtnAdd">
+            <text>确认添加</text>
+        </button>
+    </view>
+  </view>   
+    <block wx:if="{{isModified == 'false'}}">
+      <view class="check-in">
+        <view style="display:flex;justify-content: center;">
+            <button type="primary" class="btn-check-in" bindtap="clickBtnCheckIn">
+                <text>确定检入</text>
+            </button>
+        </view>
+        <!-- <view style="display:flex;justify-content: center;">
+            <button type="primary" class="btn-check-in" bindtap="clickBtnCancel">
+                <text>取消检入</text>
+            </button>
+        </view> -->
+      </view>
+    </block>
+    <block wx:if="{{isModified == 'true'}}">
+      <view class="check-in">
+        <view style="display:flex;justify-content: center;">
+            <button type="primary" class="btn-check-in" bindtap="clickBtnModify">
+                <text>确定修改</text>
+            </button>
+        </view>
+        <!-- <view style="display:flex;justify-content: center;">
+            <button type="primary" class="btn-check-in" bindtap="clickBtnCancelM">
+                <text>取消修改</text>
+            </button>
+        </view> -->
+      </view>
+    </block>
+  </view>
+</view>
+
+<!--Customized modal-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">修改球员信息</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="number" maxlength="10" bindinput="inputNumChange" class="input" placeholder="号码" value="{{modalNum}}"></input>
+      <input placeholder-class="input-holder" maxlength="30" bindinput="inputNameChange" class="input" placeholder="姓名" value="{{modalName}}"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
+<!--Customized modal end-->
+ 

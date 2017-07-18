@@ -1,0 +1,174 @@
+
+<view class="section">
+  <view class="match-info">
+    <text class="match-info-name">{{matchName}}</text>
+  </view>
+</view>
+
+<view class="section">
+  <view class="team-name">
+    <text>{{homeTeam}}</text>
+    <text>{{guestTeam}}</text>
+  </view>
+
+  <view class="team-score">
+    <text class="team-score-text">{{homeScore}}</text>
+    <text class="quarter">第 {{quarter}} 节</text>
+    <text class="team-score-text">{{guestScore}}</text>
+  </view>
+
+  <view class="info">
+    <view class="info-left">
+    <view wx:for="{{homeTimeOut}}" wx:key="*this">
+      <image src="../../images/star.png" class="info-left-image"/>
+    </view>
+    <text>暂停</text>
+    </view>
+    <view class="info-right">
+    <text>暂停</text>
+    <view wx:for="{{guestTimeOut}}" wx:key="*this">
+      <image src="../../images/star.png" class="info-right-image"/>
+    </view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="info-left">
+    <view wx:for="{{homeFoul}}" wx:key="*this">
+      <image src="../../images/record.png" class="info-left-image"/>
+    </view>
+      <text>犯规</text>
+    </view>
+    <view class="info-right">
+      <text>犯规</text>
+    <view wx:for="{{guestFoul}}" wx:key="*this">
+      <image src="../../images/record.png" class="info-right-image"/>
+    </view>
+    </view>
+  </view> 
+</view>
+<view class="section">
+  <view class="team-header">
+    <text>{{homeTeam}}</text>
+    <text style="font-size:20rpx;color:blue" bindtap="editHPlayers">修改主队球员信息</text>
+  </view>
+  <view class="players">
+  <view wx:for="{{homePlayers}}" wx:for-item="player" wx:key="*this"> 
+    <view class="player"  wx:if="{{player.lineUp == true}}">
+        <view class="{{player.selected?'view-player-selected':'view-player-normal'}}" bindtap="selectHomePlayer" id="{{index}}">
+          <text class="player-num">{{player.num}}</text>
+          <text class="player-stats-score">Score:{{player.score}}</text>
+          <text class="player-stats-foul">F:{{player.foul}}</text>
+          <text class="player-name">{{player.name}}</text>
+        </view>        
+    </view>
+    </view>
+  </view>
+ </view>
+<view class="section">
+  <view class="team-recorder">
+    <button type="default" class="btn-score" id="s1" bindtap="clickBtnScore">
+        <text>+1</text>
+    </button>
+    <button type="default" class="btn-score" id="s2" bindtap="clickBtnScore">
+        <text>+2</text>
+    </button>
+    <button type="default" class="btn-score" id="s3" bindtap="clickBtnScore">
+        <text>+3</text>
+    </button>
+    <button type="default" class="btn-score" id="s_1" bindtap="clickBtnScore">
+        <text>-1</text>
+    </button>
+    <button type="default" class="btn-score" id="foul" bindtap="clickBtnScore">
+        <text>犯规</text>
+    </button>
+    <button type="default" class="btn-score" id="timeOut" bindtap="clickBtnScore">
+        <text>暂停</text>
+    </button>
+  </view>
+    <action-sheet class="action-sheet" hidden="{{foulHidden}}" bindchange="foulChange">
+        <block class="sheet-items" wx:for-items="{{foulItems}}" wx:key="*this">
+            <action-sheet-item class="foul-item" id="{{item}}" bindtap="clickBtnFoul">{{item}}</action-sheet-item>
+        </block>
+        <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+    </action-sheet>
+</view>
+
+<view class="section">
+  <view class="team-header">
+    <text>{{guestTeam}}</text>
+    <text style="font-size:20rpx;color:blue" bindtap="editGPlayers">修改客队球员信息</text>
+  </view>
+  <view class="players">
+  <view wx:for="{{guestPlayers}}" wx:for-item="player" wx:key="*this">
+    <view class="player"  wx:if="{{player.lineUp == true}}">
+        <view class="{{player.selected?'view-player-selected':'view-player-normal'}}" bindtap="selectGuestPlayer" id="{{index}}">
+          <text class="player-num">{{player.num}}</text>
+          <text class="player-stats-score">Score:{{player.score}}</text>
+          <text class="player-stats-foul">F:{{player.foul}}</text>
+          <text class="player-name">{{player.name}}</text>
+        </view>        
+    </view>
+    </view>
+  </view>
+</view>
+<view class="clear">
+<button type="default" class="btn-clear" id="foulAdd" bindtap="clickBtnScore">
+    <text style="font-size:25rpx">全队犯规+1</text>
+  </button>
+  <button type="default" class="btn-clear" bindtap="clickBtnQuarter">
+    <text>节数+1</text>
+  </button>
+  <button type="default" class="btn-clear" bindtap="clickBtnClearF">
+    <text>犯规复位</text>
+  </button>
+  <button type="default" class="btn-clear" bindtap="clickBtnClearT">
+    <text>暂停复位</text>
+  </button>
+  <button type="default" class="btn-clear" bindtap="clickBtnClearA">
+    <text>全部复位</text>
+  </button>
+</view>
+<view class="match-edit">
+  <button type="default" class="btn-edit" bindtap="clickBtnResult">
+    <text>生成比赛结果</text>
+  </button>
+  <button type="default" class="btn-edit" bindtap="clickBtnEdit">
+    <text>基本信息修改</text>
+  </button>
+  <button type="default" class="btn-edit" bindtap="clickBtnNew">
+    <text>新建比赛</text>
+  </button>
+</view>
+
+<modal 
+    title="犯规复位"
+     hidden="{{hiddenClearF}}"
+     confirm-text="确定"
+     cancel-text="取消"
+     bindconfirm="clearConfirmF"
+     bindcancel="clearCancel" >
+     您是否要复位全队犯规数
+</modal>
+<modal 
+    title="暂停复位"
+     hidden="{{hiddenClearT}}"
+     confirm-text="确定"
+     cancel-text="取消"
+     bindconfirm="clearConfirmT"
+     bindcancel="clearCancel" >
+     您是否要复位全队暂停数
+</modal>
+
+<modal 
+    title="全部复位"
+     hidden="{{hiddenClearA}}"
+     confirm-text="确定"
+     cancel-text="取消"
+     bindconfirm="clearConfirmA"
+     bindcancel="clearCancel" >
+     您是否要清除所有记录
+</modal>
+
+<toast hidden="{{hiddenPToast}}" duration="1000" bindchange="pToastHidden" >
+请选择一名球员!
+</toast>

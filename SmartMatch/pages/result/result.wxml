@@ -1,0 +1,87 @@
+<!--pages/result/result.wxml-->
+<view class="section">
+  <view class="result-header">   
+      <image src="../../images/vs.png"></image>  
+  </view>
+  <view class="result-winner">
+    <view class="winner-icon">
+      <view wx:if="{{winnerHome&&winnerHome !='tie'}}">
+      <image src="../../images/crown.png"></image>
+      </view>
+    </view>
+    <view class="winner-icon">
+      <view wx:if="{{!winnerHome&&winnerHome !='tie'}}">
+      <image src="../../images/crown.png"></image>
+      </view>
+    </view> 
+  </view>
+  <view class="result-header-text">
+    <view class="team-name">{{homeTeam}}</view>
+    <view class="team-name">{{guestTeam}}</view> 
+  </view>
+  <view class="result-score">
+    <text>{{homeScore}}</text>
+    <text>{{guestScore}}</text> 
+  </view>
+</view>
+
+<view class="stats">
+  <view class="stats-team">
+  <view style="width:100%">
+    <view class="table">
+        <view class="tr">
+          <view class="th" style="width:18%">号码</view>
+          <view class="th" style="width:27%">姓名</view>
+          <view class="th" style="width:20%">得分</view>
+          <view class="th" style="width:35%">犯规</view>
+        </view>
+        <view class="tr" wx:for="{{homePlayers}}">
+          <view class="td" style="width:18%">{{item.num}}</view>
+          <view class="td" style="width:27%">{{item.name}}</view>
+          <view class="td" style="width:20%">{{item.score}}</view>
+          <view class="td" style="width:35%">{{item.foul}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="stats-team">
+  <view style="width:100%">
+      <view class="table">
+        <view class="tr">
+            <view class="th" style="width:18%">号码</view>
+            <view class="th" style="width:27%">姓名</view>
+            <view class="th" style="width:20%">得分</view>
+            <view class="th" style="width:35%">犯规</view>
+        </view>
+        <view class="tr" wx:for="{{guestPlayers}}">
+            <view class="td" style="width:18%">{{item.num}}</view>
+            <view class="td" style="width:27%">{{item.name}}</view>
+            <view class="td" style="width:20%">{{item.score}}</view>
+            <view class="td" style="width:35%">{{item.foul}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="match">
+  <view class="match-info">
+    <image src="../../images/basketball.png" class="match-info-image"/>
+    <view class="match-info-text">比赛名称:{{matchName}}</view>
+  </view>
+  <view class="match-info">
+    <image src="../../images/basketball.png" class="match-info-image"/>
+    <view class="match-info-text">比赛序号:{{matchNum}}</view>
+  </view>
+  <view class="match-info">
+    <image src="../../images/basketball.png" class="match-info-image"/>
+    <view class="match-info-text">比赛日期:{{matchDate}}</view>
+  </view>
+  <view class="match-info">
+    <image src="../../images/basketball.png" class="match-info-image"/>
+    <view class="match-info-text">比赛时间:{{matchTime}}</view>
+  </view>
+  <view class="match-info">
+    <image src="../../images/basketball.png" class="match-info-image"/>
+    <view class="match-info-text">比赛地点:{{matchAdd}}</view>
+  </view>
+</view>
