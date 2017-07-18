@@ -1,0 +1,254 @@
+.section{
+border-bottom: 5rpx solid #aaa;
+}
+.match-info{
+  height: 50rpx;
+  display: flex;
+  justify-content: space-around;
+}
+
+.match-info-no{
+  font-size: 20rpx;
+  font-weight:bold;
+  color: cornflowerblue;
+}
+
+.match-info-name{
+  font-size: 40rpx;
+  font-weight:bold;
+  color: cornflowerblue;
+}
+
+.team-name{
+  height: 40rpx;
+  margin-top: 10rpx;
+  display: flex;
+}
+
+.team-name text{
+  width: 50%;
+  font-size: 40rpx;
+  font-weight:bold;
+  color: lightseagreen;
+  display: flex;
+  justify-content: center;
+}
+.quarter{
+  font-weight:bold;
+  display: flex;
+  align-content: center;
+   width: 120rpx;
+  font-size: 30rpx;
+}
+.team-score{
+  height: 80rpx;
+  margin-top: 10rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.team-score-text{
+  width: 50%;
+  font-size: 80rpx;
+  font-weight:bold;
+  color: palevioletred;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.info{
+  display: flex;
+  justify-content: space-between;
+}
+
+.info image{
+  height: 30rpx;
+  width: 30rpx
+}
+
+.info-left{
+  width: 45%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.info-left-image{
+  height: 30rpx;
+  width: 30rpx; 
+  margin-right: 10rpx;
+}
+
+.info-right{
+  width: 45%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info-right-image{
+  height: 30rpx;
+  width: 30rpx; 
+  margin-left: 10rpx;
+}
+
+.view-player-normal{
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  background-color: white;
+  height: 105rpx;
+  width: 85rpx;
+  border: 2rpx solid black;
+  display: table;
+  position: relative;
+}
+
+.view-player-selected{
+  margin-top: 5rpx;
+  margin-bottom: 5rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  background-color: yellow;
+  height: 105rpx;
+  width: 85rpx;
+  border: 2rpx solid black;
+  border-radius: 2px;
+  display: table;
+  position: relative;
+}
+.player-num{
+  text-align: center;
+  font-size: 40rpx;
+  vertical-align:middle;
+  display: table-cell;
+}
+
+.player-coach{
+  text-align: center;
+  font-size: 26rpx;
+  vertical-align:middle;
+  display: table-cell;
+}
+
+.player-stats-score{
+  color: green;
+  position: absolute;
+  font-size: 15rpx;
+  top: 72rpx;
+  left: 5rpx;
+}
+
+.player-stats-foul{
+  color: green;
+  /* margin-left: 5rpx; */
+  position: absolute;
+  font-size: 15rpx;
+  top: 88rpx;
+  left: 5rpx; 
+}
+
+.player-name{
+  font-weight: bold;
+  position: absolute;
+  top:5rpx;
+  left:10rpx;
+  font-size: 20rpx;
+}
+
+.player{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.team-header{
+  margin-left: 3%;
+  width:94%;
+  display: flex;
+  justify-content: space-between
+
+}
+
+.players{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.team-recorder{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-score {
+  font-size: 30rpx;
+  /*color: seagreen;*/
+  border: 2rpx solid black;
+  /*background-color: black;*/
+  border-radius: 50rpx;
+  padding: 0px;
+  height:100rpx;
+  width: 100rpx;
+  line-height: 50rpx;
+  display: table;
+  margin: 10rpx;
+}
+
+.btn-score text {
+  vertical-align:middle;
+  display: table-cell;
+}
+
+.foul-item{
+  height: 25rpx;
+}
+
+.clear{
+  display: flex;
+  flex-wrap: warp;
+  justify-content: flex-start;
+}
+
+.btn-clear {
+  font-size: 30rpx;
+  /*color: seagreen;*/
+  border: 2rpx solid black;
+  /*background-color: black;*/
+  border-radius: 50rpx;
+  padding: 0px;
+  height:100rpx;
+  width: 130rpx;
+  line-height: 50rpx;
+  display: table;
+  margin: 10rpx;
+}
+
+.btn-clear text {
+  vertical-align:middle;
+  display: table-cell;
+}
+
+.match-edit{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-edit {
+  font-size: 20rpx;
+  /*color: seagreen;*/
+  border: 2rpx solid black;
+  /*background-color: black;*/
+  border-radius: 20rpx; 
+  padding: 0px;
+  height:50rpx;
+  width: 150rpx;
+  line-height: 50rpx;
+  display: table;
+  margin: 10rpx;
+}
+
+.btn-edit text {
+  vertical-align:middle;
+  display: table-cell;
+}
