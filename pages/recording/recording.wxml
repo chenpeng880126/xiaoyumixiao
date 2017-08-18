@@ -47,8 +47,12 @@
   </view> 
 </view>
 <view class="section">
-  <view class="team-header">
+  <view class="team-header" >
     <text>{{homeTeam}}</text>
+    <view class="color-select">
+      <text>球衣颜色:</text>
+      <view class="team-color" style="background-color:{{homeColor}}"/>
+    </view>
     <text style="font-size:20rpx;color:blue" bindtap="editHPlayers">修改主队球员信息</text>
   </view>
   <view class="players">
@@ -56,8 +60,8 @@
     <view class="player"  wx:if="{{player.lineUp == true}}">
         <view class="{{player.selected?'view-player-selected':'view-player-normal'}}" bindtap="selectHomePlayer" id="{{index}}">
           <text class="player-num">{{player.num}}</text>
-          <text class="player-stats-score">Score:{{player.score}}</text>
-          <text class="player-stats-foul">F:{{player.foul}}</text>
+          <text class="player-stats-stitle">Score:</text><text class="player-stats-score">{{player.score}}</text>
+          <text class="player-stats-ftitle">F:</text><text class="player-stats-foul">{{player.foul}}</text>
           <text class="player-name">{{player.name}}</text>
         </view>        
     </view>
@@ -87,7 +91,7 @@
   </view>
     <action-sheet class="action-sheet" hidden="{{foulHidden}}" bindchange="foulChange">
         <block class="sheet-items" wx:for-items="{{foulItems}}" wx:key="*this">
-            <action-sheet-item class="foul-item" id="{{item}}" bindtap="clickBtnFoul">{{item}}</action-sheet-item>
+            <action-sheet-item class="foul-item" id="{{index}}" bindtap="clickBtnFoul">{{item}}</action-sheet-item>
         </block>
         <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
     </action-sheet>
@@ -96,6 +100,10 @@
 <view class="section">
   <view class="team-header">
     <text>{{guestTeam}}</text>
+    <view class="color-select">
+      <text>球衣颜色:</text>
+      <view class="team-color" style="background-color:{{guestColor}}"/>
+    </view>
     <text style="font-size:20rpx;color:blue" bindtap="editGPlayers">修改客队球员信息</text>
   </view>
   <view class="players">
@@ -103,8 +111,8 @@
     <view class="player"  wx:if="{{player.lineUp == true}}">
         <view class="{{player.selected?'view-player-selected':'view-player-normal'}}" bindtap="selectGuestPlayer" id="{{index}}">
           <text class="player-num">{{player.num}}</text>
-          <text class="player-stats-score">Score:{{player.score}}</text>
-          <text class="player-stats-foul">F:{{player.foul}}</text>
+          <text class="player-stats-stitle">Score:</text><text class="player-stats-score">{{player.score}}</text>
+          <text class="player-stats-ftitle">F:</text><text class="player-stats-foul">{{player.foul}}</text>
           <text class="player-name">{{player.name}}</text>
         </view>        
     </view>
@@ -135,8 +143,8 @@
   <button type="default" class="btn-edit" bindtap="clickBtnEdit">
     <text>基本信息修改</text>
   </button>
-  <button type="default" class="btn-edit" bindtap="clickBtnNew">
-    <text>新建比赛</text>
+  <button type="default" class="btn-edit" bindtap="clickBtnEnd">
+    <text>结束比赛</text>
   </button>
 </view>
 

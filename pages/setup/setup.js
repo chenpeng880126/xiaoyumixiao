@@ -14,10 +14,13 @@ Page({
     matchNum: '',
     homeTeam:'',
     guestTeam:'',
+    homeColor:null,
+    guestColor:null,
     numIndex:4,
     num2Index: 4,
     num:[1,2,3,4,5,6,7,8,9],
-    isNew:'true'
+    isNew:'true',
+    recorder:'漕河泾男住唐镇'
   },
 
   /**
@@ -36,7 +39,10 @@ Page({
       matchAdd: app.globalData.matchAdd,
       matchNum: app.globalData.matchNum,
       homeTeam: app.globalData.homeTeam,
-      guestTeam: app.globalData.guestTeam
+      guestTeam: app.globalData.guestTeam,
+      homeColor: app.globalData.homeColor,
+      guestColor: app.globalData.guestColor,
+      recorder: app.globalData.userInfo.nickName
     });
   },
 
@@ -99,10 +105,13 @@ matchNameInput:function(e){
     }else{
       wx.showModal({
         title: '信息填写完毕',
-        content: '请确定比赛信息是否正确',
+        content: '请确定比赛信息是否正确，快速开始比赛',
         success: function (res) {
           if (res.confirm) {
             that.setGlobleData();
+            wx.redirectTo({
+              url: '../recording/recording',
+            })
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -197,6 +206,23 @@ matchNameInput:function(e){
       })
     }
   },
+
+  selectHomeColor:function(){
+    wx.navigateTo({
+      url: '../color/color?team=home',
+    })
+  },
+  selectGuestColor: function () {
+    wx.navigateTo({
+      url: '../color/color?team=guest',
+    })
+  },
+
+  backHomePage:function(){
+    wx.navigateTo({
+      url: '../index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -208,7 +234,10 @@ matchNameInput:function(e){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.setData({
+      homeColor: app.globalData.homeColor,
+      guestColor: app.globalData.guestColor,
+    });
   },
 
   
@@ -216,14 +245,14 @@ matchNameInput:function(e){
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    this.setGlobleData();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    this.setGlobleData();
   },
 
   /**

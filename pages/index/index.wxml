@@ -1,2 +1,27 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
+<!--index.wxml-->
+  <view class="usermotto">
+    <text class="user-motto">欢迎您来到智慧赛场</text>
+  </view>
+
+<view class="container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="btn-combined">
+    <button type="default" class="btn-wel" bindtap="clickBtnHistory">
+      <text>历史记录</text>
+    </button>
+    <button type="default" class="btn-wel" bindtap="clickBtnNew">
+      <text>新建比赛</text>
+    </button>
+    <button type="default" class="btn-wel" bindtap="clickBtnMore">
+      <text>更多...</text>
+    </button>
+  </view>
+</view>
+
+<view class="copyright">
+  <text>Copyright CP_HAPPINESS(WeChat ID.). All Rights Reserved</text>
+</view>
+

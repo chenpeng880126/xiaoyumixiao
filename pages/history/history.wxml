@@ -1,0 +1,23 @@
+<!--pages/history/history.wxml-->
+<view wx:if="{{history.length==0}}">
+  <view class="no-history">
+    <text>您没有历史比赛记录</text>
+  </view>
+</view>
+<view wx:else>
+  <view class="container history-list">
+    <block wx:for="{{history}}" wx:for-item="match" wx:key="*this">
+      <text class="history-item" id="{{index}}" bindtap="checkHistory">
+        {{index + 1}}.{{match.matchName}}:{{match.homeTeam}}vs{{match.guestTeam}}[{{match.matchDate}}]
+      </text>
+      <text class="clear-single-history" bindtap="remove" data-index="{{index}}">删除</text>
+    </block>
+  </view>
+</view>
+<view wx:if="{{history.length != 0}}">
+  <view class="clear-histroy">
+    <button type="default" class="btn-clear" bindtap="clickBtnClear">
+      <text>清除所有历史数据</text>
+    </button>
+  </view>
+</view>

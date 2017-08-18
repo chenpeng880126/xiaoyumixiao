@@ -6,12 +6,12 @@
   <view class="result-winner">
     <view class="winner-icon">
       <view wx:if="{{winnerHome&&winnerHome !='tie'}}">
-      <image src="../../images/crown.png"></image>
-      </view>
+      <image src="../../images/winner.png"></image>
+    </view>
     </view>
     <view class="winner-icon">
       <view wx:if="{{!winnerHome&&winnerHome !='tie'}}">
-      <image src="../../images/crown.png"></image>
+      <image src="../../images/winner.png"></image>
       </view>
     </view> 
   </view>

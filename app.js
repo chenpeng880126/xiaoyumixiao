@@ -35,17 +35,38 @@ App({
     guestTeam: "天天向上",
     homeScore: 0,
     guestScore: 0,
-    foulLimitedNum:4,
+    homeColor:'red',
+    guestColor:'blue',
+    foulLimitedNum:4, //个人累加犯规下场数－1
     quarterfFoulLimitedNum: 4,
 
+    teams:[
+    {
+      teamName: '红队',
+      players:[]
+    },
+    {
+      teamName: '蓝队',
+      players: []
+    },
+    {
+      teamName: '黑队',
+      players: []
+    },
+    {
+      teamName: '白队',
+      players: []
+    }
+    ],
+
     homePlayers: [{
-      num: '教练', name: 'TBD', score: 0,
+      num: '教练', name: '教练', score: 0,
       foul: [], lineUp: true, selected: false
     }
    ],
 
     guestPlayers: [{
-        num: '教练', name: 'TBD', score: 0,
+        num: '教练', name: '教练', score: 0,
         foul: [], lineUp: true, selected: false
       }
     ]

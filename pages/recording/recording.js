@@ -22,12 +22,16 @@ Page({
     quarter: 1,
     homeTimeOut: [],
     homeFoul: [],
+    homeFQ: 0,
+    homeColor:null,
     guestTimeOut: [],
     guestFoul: [],
+    guestFQ: 0,
+    guestColor: null,
 
     team:'',
     foulHidden:true,
-    foulItems:['P','U','T','OP','D','Delete'],
+    foulItems:['侵人犯规[P]','违体犯规[U]','技术犯规[T]','进攻犯规[P]','取消比赛资格[D]','取消上次犯规记录'],
 
     homeScore: 0,
     selectedHomePlayerNum: '',
@@ -42,7 +46,7 @@ Page({
     guestPlayers: app.globalData.guestPlayers,
 
     originPlayers: [{
-      num: '教练', name: 'TBD', score: 0,
+      num: '教练', name: '教练', score: 0,
       foul: [], lineUp: true, selected: false
     }]
 
@@ -241,6 +245,7 @@ Page({
     var gFoul = this.data.guestFoul;
 
     if (team == 'home'){
+      var hFQ = this.data.homeFQ;
       var playerFoul = 'homePlayers[' + hPlayerIndex + '].foul';
       var playerSelected = 'homePlayers[' + hPlayerIndex + '].selected';
       var selectedFoul = homePlayers[hPlayerIndex].foul;
@@ -249,49 +254,99 @@ Page({
           selectedFoul.push('P')
         } else if (n == 'Delete'){
           selectedFoul.pop();
-          hFoul.pop();
+          if (hFQ < quarterfFoulLimitedNum){
+            hFoul.pop();
+          }
+          hFQ--;
         }else{
+          hFQ++;
           selectedFoul.push(n);
         }
         if (hFoul.length < quarterfFoulLimitedNum && n != 'OP' && n != 'Delete' ) {
           hFoul.push('');
+        } else if (n == 'Delete') {
+          hFQ--;
+          console.log('delete latest foul record');
         } else {
+          wx.showToast({
+            title: '单节全队犯规已满，2次罚球',
+            icon: 'loading',
+            duration: 1000
+          });
           console.log('2 free shots');
         }
-      }else{
-        console.log('This player fouled out!');
+      } else {
+        if (n == 'Delete'){  
+          selectedFoul.pop();
+          hFoul.pop();
+          hFQ--;
+        }else{
+          wx.showToast({
+            title: '该名队员已被罚下',
+            icon: 'loading',
+            duration: 1000
+          })
+          console.log('This player fouled out!');
+        }
       } 
     
       this.setData({
+        homeFQ : hFQ,
         homeFoul: hFoul,
         [playerFoul]: selectedFoul,
         [playerSelected]: ![playerSelected],
         selectedHomePlayerIndex: '',
         selectedHomePlayer: !this.data.selectedHomePlayer,
       });
+
     } else if (team == 'guest'){
+      var gFQ = this.data.guestFQ;
       var playerFoul = 'guestPlayers[' + gPlayerIndex + '].foul';
       var playerSelected = 'guestPlayers[' + gPlayerIndex + '].selected';
       var selectedFoul = guestPlayers[gPlayerIndex].foul;
       if (selectedFoul.length <= foulLimitedNum) {
         if (n == 'OP'){
           selectedFoul.push('P')
-        } else if (n == 'Delete') {
+        } else if (n == 'Delete') { 
           selectedFoul.pop();
-          gFoul.pop();
+          if (gFQ < quarterfFoulLimitedNum) {
+            gFoul.pop();
+          }
+          gFQ--;
         }else{
+          gFQ++;
           selectedFoul.push(n);
         }
         if (gFoul.length < quarterfFoulLimitedNum && n != 'OP' && n != 'Delete') {
           gFoul.push('');
-        } else {
+        } else if(n=='Delete'){
+          gFQ--;
+          console.log('delete latest foul record');
+        } else{
+          wx.showToast({
+            title: '单节全队犯规已满，2次罚球',
+            icon: 'loading',
+            duration: 1000
+          });
           console.log('2 free shots');
         }
       } else {
-        console.log('This player fouled out!');
+        if (n == 'Delete') {
+          selectedFoul.pop();  
+          gFoul.pop();
+          gFQ--;
+        } else{
+          wx.showToast({
+            title: '该名队员已被罚下',
+            icon: 'loading',
+            duration: 1000
+          })
+          console.log('This player fouled out!');
+        }
       }
       
       this.setData({
+        guestFQ: gFQ,      
         guestFoul: gFoul,
         [playerFoul]: selectedFoul,
         [playerSelected]: ![playerSelected],
@@ -306,7 +361,9 @@ Page({
     var quarterfFoulLimitedNum = parseInt(this.data.quarterfFoulLimitedNum);
 
     var hFoul = this.data.homeFoul;
+    var hFQ = this.data.homeFQ;
     var gFoul = this.data.guestFoul;
+    var gFQ = this.data.guestFQ;
 
     var hTimeOut = this.data.homeTimeOut;
     var gTimeOut = this.data.guestTimeOut;
@@ -324,14 +381,16 @@ Page({
           hTimeOut = [];
         }
       } else if (n == 'foulAdd'){
+        hFQ++;
         if (hFoul.length < quarterfFoulLimitedNum){
           hFoul.push('');
         }else{
-          hFoul = [];
+          // hFoul = [];
         }
       }
       this.setData({
         homeTimeOut: hTimeOut,
+        homeFQ : hFQ,
         homeFoul : hFoul,
         [playerSelected]: ![playerSelected],
         selectedHomePlayerIndex: '',
@@ -346,14 +405,16 @@ Page({
           gTimeOut = [];
         }
       } else if (n == 'foulAdd') {
+        gFQ++;
         if (gFoul.length < quarterfFoulLimitedNum) {
           gFoul.push('');
         } else {
-          gFoul = [];
+          // gFoul = [];
         }
       }
       this.setData({
         guestTimeOut: gTimeOut,
+        guestFQ: gFQ,
         guestFoul: gFoul,
         [playerSelected]: ![playerSelected],
         selectedGuestPlayerIndex: '',
@@ -365,22 +426,22 @@ Page({
   clickBtnFoul:function(e){
     var id = e.target.id;
     switch(id){
-      case 'P':
+      case '0':
         this.operFoul('P');
         break;
-      case 'U':
+      case '1':
         this.operFoul('U');
         break;
-      case 'T':
+      case '2':
         this.operFoul('T');
         break;
-      case 'D':
-        this.operFoul('D');
-        break;
-      case 'OP':
+      case '3':
         this.operFoul('OP');
         break;
-      case 'Delete':
+      case '4':
+        this.operFoul('D');
+        break;
+      case '5':
         this.operFoul('Delete');
         break;
     } 
@@ -424,6 +485,8 @@ Page({
     this.setData({
       homeFoul: [],
       guestFoul: [],
+      homeFQ :0,
+      guestFQ : 0,
       hiddenClearF: true
     })
   },
@@ -501,7 +564,9 @@ Page({
       guestPlayers: app.globalData.guestPlayers,
       matchName: app.globalData.matchName,
       homeTeam: app.globalData.homeTeam,
+      homeColor: app.globalData.homeColor,
       guestTeam: app.globalData.guestTeam,
+      guestColor: app.globalData.guestColor,
       foulLimitedNum: app.globalData.foulLimitedNum,
       quarterfFoulLimitedNum: app.globalData.quarterfFoulLimitedNum
     })
@@ -555,13 +620,14 @@ Page({
     }) 
   },
 
-  clickBtnNew:function(){
+  clickBtnEnd:function(){
     var that =this;
     wx.showModal({
-      title: '新建比赛',
-      content: '当前比赛信息将全部清除，您是否确认新建比赛？',
+      title: '结束比赛',
+      content: '当前比赛信息将全部清除，您是否确认结束比赛？',
       success: function (res) {
         if (res.confirm) {
+          that.saveHistory();
           that.resetGlobleData();
           wx.showToast({
             title: '跳转中...',
@@ -569,7 +635,7 @@ Page({
             duration: 2000
           });
           wx.redirectTo({
-            url: '../setup/setup'
+            url: '../index/index'
           })
         } else if (res.cancel) {
           console.log('用户点击取消')
@@ -591,6 +657,38 @@ Page({
     app.globalData.homePlayers = this.data.originPlayers;
     app.globalData.guestPlayers = this.data.originPlayers;
   },
+
+  saveHistory:function(){
+    var history = wx.getStorageSync('history') || [];
+    var mName = this.data.matchName;
+    var hT = this.data.homeTeam;
+    var gT = this.data.guestTeam;
+    var mD = app.globalData.matchDate;
+    var mT = app.globalData.matchTime;
+    var mA = app.globalData.matchAdd;
+    var mN = app.globalData.matchNum;
+    var hPs = this.data.homePlayers;
+    var hS = this.data.homeScore;
+    var gPs = this.data.guestPlayers;
+    var gS = this.data.guestScore;
+
+    var match = {
+      matchName: mName,
+      homeTeam: hT,
+      guestTeam: gT,
+      matchDate: mD,
+      matchTime: mT,
+      matchAdd: mA,
+      matchNum: mN,
+      homePlayers: hPs,
+      homeScore: hS,
+      guestPlayers: gPs,
+      guestScore: gS
+    }
+    
+    history.unshift(match);
+    wx.setStorageSync('history', history)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -605,6 +703,8 @@ Page({
     this.setData({
       homePlayers: app.globalData.homePlayers,
       guestPlayers: app.globalData.guestPlayers,
+      homeColor: app.globalData.homeColor,
+      guestColor: app.globalData.guestColor,
       matchName: app.globalData.matchName,
       homeTeam: app.globalData.homeTeam,
       guestTeam: app.globalData.guestTeam,

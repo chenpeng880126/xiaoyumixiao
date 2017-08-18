@@ -1,0 +1,26 @@
+<!--pages/teams/teams.wxml-->
+<view class="header">
+  <view wx:if="{{teams.length==0}}">
+    <view class="no-team">
+      <text>您本地没有球队检入</text>
+    </view>
+  </view>
+  <view wx:else>
+      <view wx:for="{{teams}}" wx:for-item="team" wx:key="*this">
+        <view class="team">
+          <text class="team-info">{{index + 1}}.{{team.teamName}}</text> 
+          <text class="team-edit" bindtap="edit" data-index="{{index}}">修改</text>
+          <text class="team-edit" bindtap="remove" data-index="{{index}}">删除</text>
+          <!-- <text class="clear-single-history" bindtap="remove" data-index="{{index}}">删除</text> -->
+        </view>
+      </view> 
+  </view>
+</view>
+<view class="controler">
+  <button type="primary" class="btn-save" bindtap="clickBtnSave">
+      <text>确认选择</text>
+  </button>
+  <button type="primary" class="btn-save" bindtap="clickBtnHCheckIn">
+      <text>新建球队</text>
+  </button>
+</view>

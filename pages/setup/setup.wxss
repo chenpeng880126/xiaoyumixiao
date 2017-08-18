@@ -2,9 +2,14 @@
   position: relative
 }
 .setup-header image{
-  height: 300rpx;
+  height: 350rpx;
   width: 100%;
   border-bottom: 5px solid #999;
+}
+.setup-header-homepage{
+  position: absolute;
+  top: 5rpx;
+  left :20rpx;
 }
 
 .copyright{
@@ -48,7 +53,19 @@
 }
 
 .setup-info-input{
+  width: 350rpx;
   font-size: 30rpx;
+}
+
+.setup-info-color{
+  display: flex;
+  align-items: center;
+  width: 100rpx;
+  height: 30rpx;
+  font-size: 25rpx;
+  border: 1rpx solid black;
+  border-radius: 10rpx;
+  /* background-color: red; */
 }
 
 .date-picker{

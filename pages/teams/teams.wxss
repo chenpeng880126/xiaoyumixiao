@@ -1,0 +1,62 @@
+/* pages/teams/teams.wxss */
+.header{
+width: 100%;
+border-bottom: 10rpx solid gainsboro;
+
+}
+
+.no-history{
+  display: flex;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.team{
+  /* border-bottom: 2rpx solid black; */
+  display: flex;
+  width: 90%;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-left: 5%;
+  margin-bottom: 20rpx;
+}
+
+.team-info{
+  border: 2rpx solid black;
+  display: flex;
+  justify-content: flex-start;
+  background-color: yellow; 
+  width: 60%;
+  font-size: 40rpx;
+}
+
+.team-edit{
+  display: flex;
+  width: 13%;
+  color: blue;
+  justify-content: center;
+  /* background-color: blue; */
+  font-size: 30rpx;
+}
+
+.btn-save{
+  font-size: 30rpx;
+  /* border: 2rpx solid black; */
+  border-radius: 50rpx;
+  padding: 0px;
+  height:80rpx;
+  width: 150rpx;
+  line-height: 50rpx;
+  display: table;
+  margin: 10rpx;
+}
+
+.btn-save text {
+  vertical-align:middle;
+  display: table-cell;
+}
+
+.controler{
+  display: flex;
+  justify-content: space-around;
+}

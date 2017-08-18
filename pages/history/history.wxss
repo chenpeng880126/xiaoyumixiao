@@ -1,0 +1,57 @@
+/* pages/history/history.wxss */
+.no-history{
+  display: flex;
+  justify-content: center;
+  padding: 40rpx;
+}
+.no-history text{
+  color: gainsboro;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40rpx;
+}
+.history-item {
+  color: royalblue;
+  font-size: 35rpx;
+  margin: 5rpx;
+}
+
+.clear-single-history{
+  color: yellowgreen;
+  font-size: 25rpx;
+  margin-top: 5rpx;
+  margin-left: 88%;
+  border-bottom: 1rpx solid yellowgreen;
+}
+
+.clear-histroy{
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50rpx;
+}
+
+
+.btn-clear {
+  font-size: 20rpx;
+  /*color: seagreen;*/
+  border: 2rpx solid black;
+  /*background-color: black;*/
+  border-radius: 20rpx; 
+  padding: 0px;
+  height:50rpx;
+  width: 180rpx;
+  line-height: 50rpx;
+  display: table;
+  margin: 10rpx;
+}
+
+.btn-edit text {
+  vertical-align:middle;
+  display: table-cell;
+}

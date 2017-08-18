@@ -1,8 +1,11 @@
 <view class="setup-header">
     <image src="../../images/basketball3.png"></image>
+    <view class=".setup-header-homepage" bindtap="backHomePage">
+      <image style="width:62rpx;height:64rpx;border-bottom: none;" src="../../images/home.png"></image>
+    </view>
     <view class="copyright">
-      <image src="../../images/copyright.png"></image>
-      <text>漕河泾男住唐镇</text>
+      <!-- <image src="../../images/copyright.png"></image> -->
+      <text>记录员：{{recorder}}</text>
     </view>
 </view>
 
@@ -11,6 +14,25 @@
     <view class="setup-info-text">比赛名称:</view>
     <view><input class="setup-info-input" bindinput="matchNameInput" value="{{matchName}}" 
     placeholder="please input here" auto-focus/></view>
+</view>
+
+<view class="setup-info" >
+    <image src="../../images/team.png" 
+    style="height:40rpx;width:40rpx;margin-bottom:5rpx;margin-right:10rpx"/>
+    <view class="setup-info-text">主队名称:</view>
+    <view><input class="setup-info-input" bindinput="homeTeamInput" value="{{homeTeam}}" 
+    placeholder="please input here" /></view>
+    <view class="setup-info-color" style="background-color:{{homeColor}}" bindtap="selectHomeColor">
+    球衣颜色</view>
+</view>
+
+<view class="setup-info" >
+    <image src="../../images/team.png" 
+    style="height:40rpx;width:40rpx;margin-bottom:5rpx;margin-right:10rpx"/>
+    <view class="setup-info-text">客队名称:</view>
+    <view><input class="setup-info-input" bindinput="guestTeamInput" value="{{guestTeam}}" 
+    placeholder="please input here" /></view>
+    <view class="setup-info-color" style="background-color:{{guestColor}}" bindtap="selectGuestColor">球衣颜色</view>
 </view>
 
 <view class="setup-info" >
@@ -47,21 +69,7 @@
     placeholder="please input here" /></view>
 </view>
 
-<view class="setup-info" >
-    <image src="../../images/teamred.png" 
-    style="height:40rpx;width:40rpx;margin-bottom:5rpx;margin-right:10rpx"/>
-    <view class="setup-info-text">主队名称:</view>
-    <view><input class="setup-info-input" bindinput="homeTeamInput" value="{{homeTeam}}" 
-    placeholder="please input here" /></view>
-</view>
 
-<view class="setup-info" >
-    <image src="../../images/teamblue.png" 
-    style="height:40rpx;width:40rpx;margin-bottom:5rpx;margin-right:10rpx"/>
-    <view class="setup-info-text">客队名称:</view>
-    <view><input class="setup-info-input" bindinput="guestTeamInput" value="{{guestTeam}}" 
-    placeholder="please input here" /></view>
-</view>
 
 <view class="setup-info" >
     <image src="../../images/basketball.png" class="setup-info-image"/>
@@ -84,9 +92,11 @@
 </view>
 
 <view class="save">
+<view wx:if="{{isNew !='false'}}"> 
   <button type="primary" class="btn-save" bindtap="clickBtnSave">
-      <text>保存信息</text>
+      <text>快速开始</text>
   </button>
+  </view>
   <button type="primary" class="btn-save" bindtap="clickBtnHCheckIn">
       <text>主队检入</text>
   </button>

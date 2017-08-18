@@ -1,0 +1,11 @@
+<!--pages/color/color.wxml-->
+<view class="color-select">
+  <view>球衣颜色：</view>
+  <view class="team-color" style="background-color:{{teamColor}}"/>
+</view>
+
+<view class="colors">
+  <view wx:for="{{colors}}"  wx:key="*this" wx:for-item="color">
+    <button class="color-btn"  id="{{index}}" type="default" style="background:{{color}};" bindtap="clickBtnColor"></button>
+  </view>
+</view>

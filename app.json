@@ -1,12 +1,16 @@
 {
   "pages":[
     
+    "pages/index/index",
     "pages/setup/setup",
+    "pages/color/color",
     "pages/recording/recording",
+    "pages/history/history",
+   "pages/teams/teams",
+    "pages/logs/logs",
     "pages/result/result",
-    "pages/index/index",  
-    "pages/register/register",
-    "pages/logs/logs"
+    "pages/register/register"
+    
 
   ],
   "window":{

@@ -131,13 +131,27 @@ border-bottom: 5rpx solid #aaa;
   vertical-align:middle;
   display: table-cell;
 }
-
+.player-stats-stitle{
+  color: black;
+  position: absolute;
+  font-size: 15rpx;
+  top: 72rpx;
+  left: 5rpx;
+}
 .player-stats-score{
   color: green;
   position: absolute;
   font-size: 15rpx;
   top: 72rpx;
-  left: 5rpx;
+  left: 50rpx;
+}
+.player-stats-ftitle{
+  color: black;
+  /* margin-left: 5rpx; */
+  position: absolute;
+  font-size: 15rpx;
+  top: 88rpx;
+  left: 5rpx; 
 }
 
 .player-stats-foul{
@@ -146,7 +160,7 @@ border-bottom: 5rpx solid #aaa;
   position: absolute;
   font-size: 15rpx;
   top: 88rpx;
-  left: 5rpx; 
+  left: 18rpx; 
 }
 
 .player-name{
@@ -166,8 +180,25 @@ border-bottom: 5rpx solid #aaa;
   margin-left: 3%;
   width:94%;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  align-items: center;
 
+}
+.color-select{
+  display: flex;
+  align-items: center;
+  width: 300rpx;
+}
+
+.color-select text{
+ font-size: 20rpx;
+}
+
+.team-color{
+  width: 140rpx;
+  height: 25rpx;
+  border: 1rpx solid black;
+  border-radius: 10rpx;
 }
 
 .players{
@@ -252,3 +283,4 @@ border-bottom: 5rpx solid #aaa;
   vertical-align:middle;
   display: table-cell;
 }
+

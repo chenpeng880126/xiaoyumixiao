@@ -26,20 +26,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var homePlayers = app.globalData.homePlayers;
-    var guestPlayers = app.globalData.guestPlayers;
-    var hScore = app.globalData.homeScore;
-    var gScore = app.globalData.guestScore;
-    var homeTeam = app.globalData.homeTeam;
-    var guestTeam = app.globalData.guestTeam;
+    var isHistory = options.isHistory;
+    var match = null;
+    var homePlayers = null;
+    var guestPlayers = null;
+    var hScore = null;
+    var gScore = null;
+    var homeTeam = null;
+    var guestTeam = null;
     var winnerHome = null;
 
-    var matchName = app.globalData.matchName;
-    var matchDate = app.globalData.matchDate;
-    var matchTime = app.globalData.matchTime;
-    var matchAdd = app.globalData.matchAdd;
-    var matchNum = app.globalData.matchNum;
+    var matchName = null;
+    var matchDate = null;
+    var matchTime = null;
+    var matchAdd = null;
+    var matchNum = null;
 
+    if (isHistory =='true'){ 
+      match = JSON.parse(options.match);
+      matchName = match.matchName;
+      homeTeam = match.homeTeam;
+      guestTeam = match.guestTeam;
+      matchDate = match.matchDate;
+      matchTime = match.matchTime;
+      matchAdd = match.matchAdd;
+      matchNum = match.matchNum;
+
+      homePlayers = match.homePlayers;
+      guestPlayers = match.guestPlayers;
+      hScore = match.homeScore;
+      gScore = match.guestScore;
+    }else{
+      console.log('get info from global');
+      homePlayers = app.globalData.homePlayers;
+      guestPlayers = app.globalData.guestPlayers;
+      hScore = app.globalData.homeScore;
+      gScore = app.globalData.guestScore;
+      homeTeam = app.globalData.homeTeam;
+      guestTeam = app.globalData.guestTeam;
+
+      matchName = app.globalData.matchName;
+      matchDate = app.globalData.matchDate;
+      matchTime = app.globalData.matchTime;
+      matchAdd = app.globalData.matchAdd;
+      matchNum = app.globalData.matchNum;
+    }
     // for (var i= 0; i < homePlayers.length; i++){
     //   if(homePlayers[i].num == '教练'){
     //     homePlayers.splice(i, 1);
